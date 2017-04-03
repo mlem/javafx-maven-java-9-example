@@ -49,8 +49,8 @@
                     <jdkToolchain>
                         <version>[1.5,9)</version>
                     </jdkToolchain>
-                    <source>1.9</source>
-                    <target>1.9</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
         </plugins>
