@@ -44,7 +44,11 @@
                     <keyStoreAlias>example-user</keyStoreAlias>
                     <keyStorePassword>example-password</keyStorePassword>
                     <allPermissions>true</allPermissions>
-
+                    <certDomain>at.mlem</certDomain>
+                    <certCountry>Austria</certCountry>
+                    <certState>Vienna</certState>
+                    <certOrg>at.mlem</certOrg>
+                    <certOrgUnit>Development</certOrgUnit>
                 </configuration>
             </plugin>
 
