@@ -17,6 +17,14 @@ public class MainApp extends Application {
     }
 
     public void start(Stage stage) throws Exception {
+        FrameworkLauncher frameworkLauncher = new FrameworkLauncher();
+        Thread osgiThread = new Thread(() -> {
+            frameworkLauncher.startOsgiFrameworkAndWaitForStop();
+        });
+        osgiThread.start();
+        stage.setOnCloseRequest((a) -> {
+            frameworkLauncher.shutdownFramework();
+        });
 
         log.info("Starting Hello JavaFX and Maven demonstration application");
 
