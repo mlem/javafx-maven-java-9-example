@@ -1,7 +1,5 @@
 package at.mlem;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -12,7 +10,6 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.swing.event.HyperlinkEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -27,13 +24,11 @@ public class HelloController  implements Initializable
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        tiereMenu.getItems().stream().forEach(
-                menuItem -> {
-                    menuItem.setOnAction(event -> {
-                        MenuItem source = (MenuItem) event.getSource();
-                        firstNameField.setText(source.getText());
-                    });
-                }
+        tiereMenu.getItems().forEach(
+                menuItem -> menuItem.setOnAction(event -> {
+                    MenuItem source = (MenuItem) event.getSource();
+                    firstNameField.setText(source.getText());
+                })
         );
     }
 

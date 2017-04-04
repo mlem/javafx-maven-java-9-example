@@ -1,13 +1,15 @@
-package at.mlem;
+package at.mlem.framework;
 
-import java.io.*;
-
+import org.apache.felix.main.AutoProcessor;
 import org.apache.felix.main.Main;
 import org.osgi.framework.BundleException;
-import org.osgi.framework.launch.*;
-import org.apache.felix.main.AutoProcessor;
+import org.osgi.framework.launch.Framework;
+import org.osgi.framework.launch.FrameworkFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 public class FrameworkLauncher {
 
@@ -37,18 +39,13 @@ public class FrameworkLauncher {
         java.net.URL url = Main.class.getClassLoader().getResource(
                 "META-INF/services/org.osgi.framework.launch.FrameworkFactory");
         if (url != null) {
-            BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()));
-            try {
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()))) {
                 for (String s = br.readLine(); s != null; s = br.readLine()) {
                     s = s.trim();
                     // Try to load first non-empty, non-commented line.
                     if ((s.length() > 0) && (s.charAt(0) != '#')) {
                         return (FrameworkFactory) Class.forName(s).newInstance();
                     }
-                }
-            } finally {
-                if (br != null) {
-                    br.close();
                 }
             }
         }

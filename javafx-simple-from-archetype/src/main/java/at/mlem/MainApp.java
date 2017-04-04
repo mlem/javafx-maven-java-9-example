@@ -1,5 +1,6 @@
 package at.mlem;
 
+import at.mlem.framework.FrameworkLauncher;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,20 +19,16 @@ public class MainApp extends Application {
 
     public void start(Stage stage) throws Exception {
         FrameworkLauncher frameworkLauncher = new FrameworkLauncher();
-        Thread osgiThread = new Thread(() -> {
-            frameworkLauncher.startOsgiFrameworkAndWaitForStop();
-        });
+        Thread osgiThread = new Thread(frameworkLauncher::startOsgiFrameworkAndWaitForStop);
         osgiThread.start();
-        stage.setOnCloseRequest((a) -> {
-            frameworkLauncher.shutdownFramework();
-        });
+        stage.setOnCloseRequest((a) -> frameworkLauncher.shutdownFramework());
 
         log.info("Starting Hello JavaFX and Maven demonstration application");
 
         String fxmlFile = "/fxml/hello.fxml";
         log.debug("Loading FXML for main view from: {}", fxmlFile);
         FXMLLoader loader = new FXMLLoader();
-        Parent rootNode = (Parent) loader.load(getClass().getResourceAsStream(fxmlFile));
+        Parent rootNode = loader.load(getClass().getResourceAsStream(fxmlFile));
 
         log.debug("Showing JFX scene");
         Scene scene = new Scene(rootNode, 400, 200);
