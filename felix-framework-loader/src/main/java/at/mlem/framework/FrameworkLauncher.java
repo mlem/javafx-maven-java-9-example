@@ -2,7 +2,6 @@ package at.mlem.framework;
 
 import org.apache.felix.main.AutoProcessor;
 import org.apache.felix.main.Main;
-import org.osgi.framework.BundleException;
 import org.osgi.framework.launch.Framework;
 import org.osgi.framework.launch.FrameworkFactory;
 import org.slf4j.Logger;
@@ -27,7 +26,10 @@ public class FrameworkLauncher {
             m_fwk.init();
             AutoProcessor.process(null, m_fwk.getBundleContext());
             m_fwk.start();
-            m_fwk.waitForStop(0);
+
+            Activator activator = new Activator();
+            activator.start(m_fwk.getBundleContext());
+            m_fwk.stop();
             System.exit(0);
         } catch (Exception ex) {
             logger.error("Could not create framework", ex);
@@ -53,12 +55,4 @@ public class FrameworkLauncher {
         throw new Exception("Could not find framework factory.");
     }
 
-    public void shutdownFramework() {
-        logger.info("stopping osgi");
-        try {
-            m_fwk.stop();
-        } catch (BundleException e) {
-            logger.error("problem stopping osgi framework", e);
-        }
-    }
 }

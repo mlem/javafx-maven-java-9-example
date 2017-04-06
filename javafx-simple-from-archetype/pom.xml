@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
@@ -35,8 +35,9 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>8.8.3</version>
                 <configuration>
+                    <verbose>true</verbose>
 
-                    <mainClass>at.mlem.MainApp</mainClass>
+                    <mainClass>at.mlem.mainui.MainUI</mainClass>
 
                     <!-- only required if signing the jar file -->
                     <keyStoreAlias>example-user</keyStoreAlias>
@@ -50,16 +51,24 @@
                 </configuration>
             </plugin>
 
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Embed-Dependency>*;scope=compile|runtime</Embed-Dependency>
+                        <Embed-Transitive>true</Embed-Transitive>
+                        <Private-Package>at.mlem.*</Private-Package>
+                        <Bundle-Activator>at.mlem.mainui.Activator</Bundle-Activator>
+                    </instructions>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
 
     <dependencies>
-        <dependency>
-            <groupId>at.mlem</groupId>
-            <artifactId>felix-framework-loader</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
 
         <!-- MigLayout -->
 
@@ -77,6 +86,11 @@
             <version>2.6</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.osgi.core</artifactId>
+            <version>1.4.0</version>
+        </dependency>
       
     </dependencies>
 

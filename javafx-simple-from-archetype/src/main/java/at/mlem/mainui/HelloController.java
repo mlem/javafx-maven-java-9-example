@@ -1,4 +1,4 @@
-package at.mlem;
+package at.mlem.mainui;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

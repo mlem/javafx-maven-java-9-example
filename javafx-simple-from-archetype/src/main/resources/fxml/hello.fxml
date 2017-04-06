@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import org.tbee.javafx.scene.layout.fxml.*?>
 <VBox xmlns:fx="http://javafx.com/fxml/1" id="vbox" focusTraversable="true" prefHeight="400" prefWidth="800"
-      xmlns="http://javafx.com/javafx/8.0.112" fx:controller="at.mlem.HelloController">
+      xmlns="http://javafx.com/javafx/8.0.112" fx:controller="at.mlem.mainui.HelloController">
 
     <MenuBar>
         <Menu fx:id="tiereMenu" text="Tiere">

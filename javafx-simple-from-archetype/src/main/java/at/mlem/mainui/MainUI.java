@@ -1,6 +1,5 @@
-package at.mlem;
+package at.mlem.mainui;
 
-import at.mlem.framework.FrameworkLauncher;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,20 +8,16 @@ import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class MainApp extends Application {
+public class MainUI extends Application {
 
-    private static final Logger log = LoggerFactory.getLogger(MainApp.class);
+    private static final Logger log = LoggerFactory.getLogger(MainUI.class);
 
-    public static void main(String[] args) throws Exception {
+
+    public void launchUI(String[] args) {
         launch(args);
     }
 
     public void start(Stage stage) throws Exception {
-        FrameworkLauncher frameworkLauncher = new FrameworkLauncher();
-        Thread osgiThread = new Thread(frameworkLauncher::startOsgiFrameworkAndWaitForStop);
-        osgiThread.start();
-        stage.setOnCloseRequest((a) -> frameworkLauncher.shutdownFramework());
-
         log.info("Starting Hello JavaFX and Maven demonstration application");
 
         String fxmlFile = "/fxml/hello.fxml";
